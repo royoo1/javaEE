@@ -148,7 +148,7 @@ def make_server(server_address, application):
 	
 
 httpd = make_server(SERVER_ADDRESS, application)
-print "Serving HTTP on port 7777..."
+print "Serving HTTP on port 3333..."
 httpd.serve_forever()
 	
 	
