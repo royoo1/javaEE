@@ -59,8 +59,8 @@ public class WeiboListServiceImpl implements WeiboListService {
 			weibo.setCommentNumber(Integer.parseInt(weibodao.getCommentNumber(WeiboID)));
 			weibo.setUserId(userId);
 			
-			weibo.setAtUserIdList(weibodao.getAtUserIdList(WeiboID));
-			weibo.setTopicIdList(weibodao.getTopicIdList(WeiboID));
+			weibo.setAtUserIdList(weibodao.getAtUserList(WeiboID));
+			weibo.setTopicIdList(weibodao.getTopicList(WeiboID));
 			weibo.setForwardNumber( weibodao.getForwardNumber(WeiboID));
 			
 			weibolist.add(weibo);
