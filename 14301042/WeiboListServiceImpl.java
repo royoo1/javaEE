@@ -46,25 +46,26 @@ public class WeiboListServiceImpl implements WeiboListService {
 		UserDAO userdao=new UserDAOImpl();
 		WeiboDAO weibodao=new WeiboDAOImpl();
 		
-		
+		//获得微博ID
 		List<String> WeiboString=userdao.getWeibo(userId,pageIndex,pagePerNumber);
+		//创建Weibo对象，加入微博列表
 		 for(Iterator<String>  it=WeiboString.iterator();it.hasNext();){
             WeiboID=it.next();
 			weibo=new Weibo();
 			
-			weibo.setContent(weibodao.getContent(WeiboID))；
-			weibo.setLike(Integer.parseInt(weibodao.getLikeNumber(WeiboID)))；
-			weibo.setDate(weibodao.getTime(WeiboID))；
-			weibo.setCommentNumber(Integer.parseInt(weibodao.getCommentNumber(WeiboID)))；
-			weibo.setUserId(userId)；
+			weibo.setContent(weibodao.getContent(WeiboID));
+			weibo.setLike(Integer.parseInt(weibodao.getLikeNumber(WeiboID)));
+			weibo.setDate(weibodao.getTime(WeiboID));
+			weibo.setCommentNumber(Integer.parseInt(weibodao.getCommentNumber(WeiboID)));
+			weibo.setUserId(userId);
 			
-			weibo.setAtUserIdList(weibodao.getAtUserIdList(WeiboID))；
-			weibo.setTopicIdList(weibodao.getTopicIdList(WeiboID))；
+			weibo.setAtUserIdList(weibodao.getAtUserIdList(WeiboID));
+			weibo.setTopicIdList(weibodao.getTopicIdList(WeiboID));
 			weibo.setForwardNumber( weibodao.getForwardNumber(WeiboID));
 			
 			weibolist.add(weibo);
         }
-		
+		//返回微博列表
 		return weibolist;
 	};
 	
@@ -82,7 +83,7 @@ public class WeiboListServiceImpl implements WeiboListService {
 		
 		
 		RecommendWeiboService recommendWeiboService=new RecommendWeiboServiceImpl();
-		return recommendWeiboService.getRecommentWeiboList(userId,pageIndex,numberPerPage);;
+		return recommendWeiboService.getRecommentWeiboList(userId,pageIndex,numberPerPage);
 		
 	};
 }
