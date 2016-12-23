@@ -78,12 +78,32 @@ public class WeiboListServiceImpl implements WeiboListService {
 	 * @param pageIndex : start from 0 which means the first page.
 	 * @param numberPerPage : for example, 20 or 30 weibos for each page.
 	 * @return
+	 如果要是返回最热的微博是可行的，最热微博，找到粉丝人数最多的，
+	 或者就像微博那样，热门
 	 */
 	List<Weibo> getWeiboList(String pageIndex, int numberPerPage){
+		String WeiboID;
+		Weibo weibo;
+		List<Weibo> weibolist=new ArrayList<Weibo>();
+		UserDAO userdao=new UserDAOImpl();
+		List<String> userIdList;
 		
+	    userIdList=userdao.getUserId();
+		String firtId=userIdList.get(0);
+		String secondId;
+		int firstIdFollowerNumber;
+		int secondIdFollowerNumber;
 		
-		RecommendWeiboService recommendWeiboService=new RecommendWeiboServiceImpl();
-		return recommendWeiboService.getRecommentWeiboList(userId,pageIndex,numberPerPage);
+		for(Iterator<String>  it=userIdList.iterator();it.hasNext();){
+           secondId=it.next();
+		   firstIdFollowerNumber=Integer.parseInt(usedao.getFollowerNumber(firstId));
+		   secondIdFollowerNumber=Integer.parseInt(usedao.getFollowerNumber(secondId));
+		   if(secondIdFollowerNumber>=firstIdFollowerNumber){
+			   firstId=secondId;
+		   }
+        }
+	 	
+		return getWeiboList(firstId,pageIndex,numberPerPage);
 		
 	};
 }
